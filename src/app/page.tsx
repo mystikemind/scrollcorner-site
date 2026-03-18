@@ -1,6 +1,6 @@
 import ArticleCard from '@/components/ArticleCard';
 import CategorySection from '@/components/CategorySection';
-import { CATEGORIES, getAllArticles, getArticlesByCategory } from '@/lib/articles';
+import { CATEGORIES, getArticlesByCategory } from '@/lib/articles';
 
 export const revalidate = 300;
 
@@ -13,11 +13,6 @@ export default function HomePage() {
   const topStories = CATEGORIES.filter(cat => cat !== 'World-News').map(cat => {
     return getArticlesByCategory(cat, 1)[0] || null;
   }).filter(Boolean);
-
-  // Secondary hero row: next 3 most recent articles across all categories
-  const allRecent = getAllArticles();
-  const usedSlugs = new Set([hero?.slug, ...topStories.map(a => a?.slug)]);
-  const secondaryHero = allRecent.filter(a => !usedSlugs.has(a.slug)).slice(0, 3);
 
   if (!hero) {
     return (
@@ -42,15 +37,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* ── SECONDARY HERO ROW ── */}
-      {secondaryHero.length > 0 && (
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          {secondaryHero.map(a => (
-            <ArticleCard key={a.slug} article={a} size="large" />
-          ))}
-        </section>
-      )}
 
       {/* ── AD SLOT ── */}
       <div className="w-full h-20 bg-[#0f1623] rounded-xl mb-10 flex items-center justify-center text-white/15 text-xs border border-white/5 tracking-widest uppercase">
