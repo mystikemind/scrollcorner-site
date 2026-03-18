@@ -10,9 +10,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       {/* Breaking news ticker */}
-      <div className="bg-[#e63946] text-white text-xs overflow-hidden whitespace-nowrap py-1.5">
-        <div className="flex items-center gap-0">
-          <span className="flex-shrink-0 font-black uppercase tracking-widest px-4 bg-white text-[#e63946] mr-4 py-0.5">LATEST</span>
+      <div className="bg-[#e63946] text-white text-xs py-1.5 flex items-center">
+        <span className="relative z-10 flex-shrink-0 font-black uppercase tracking-widest px-4 bg-white text-[#e63946] py-0.5 mr-2">LATEST</span>
+        <div className="flex-1 overflow-hidden whitespace-nowrap">
           <span className="ticker-content inline-block">
             Breaking news updated every 3 hours · World News · Technology · Finance · Science · Entertainment · Sports · Stay informed with ScrollCorner &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Breaking news updated every 3 hours · World News · Technology · Finance · Science · Entertainment · Sports · Stay informed with ScrollCorner
           </span>
