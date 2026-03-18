@@ -5,10 +5,24 @@ import { CATEGORIES, getAllArticles, getArticlesByCategory } from '@/lib/article
 export const revalidate = 300;
 
 export default function HomePage() {
-  const allArticles = getAllArticles();
-  const hero = allArticles[0];
-  const topStories = allArticles.slice(1, 5);
-  const secondaryHero = allArticles.slice(5, 8);
+  // Hero: latest article from World-News
+  const worldNews = getArticlesByCategory('World-News', 5);
+  const hero = worldNews[0];
+
+  // Top Stories: one latest article per category, in nav order, skip hero
+  const topStories = CATEGORIES.map(cat => {
+    const articles = getArticlesByCategory(cat, 3);
+    if (cat === 'World-News') {
+      // Skip the hero article
+      return articles.find(a => a.slug !== hero?.slug) || null;
+    }
+    return articles[0] || null;
+  }).filter(Boolean);
+
+  // Secondary hero row: next 3 most recent articles across all categories
+  const allRecent = getAllArticles();
+  const usedSlugs = new Set([hero?.slug, ...topStories.map(a => a?.slug)]);
+  const secondaryHero = allRecent.filter(a => !usedSlugs.has(a.slug)).slice(0, 3);
 
   if (!hero) {
     return (
@@ -29,7 +43,7 @@ export default function HomePage() {
         <div className="bg-[#0f1623] rounded-2xl border border-white/5 p-4 flex flex-col">
           <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-3 pb-2 border-b border-white/5">Top Stories</p>
           {topStories.map(a => (
-            <ArticleCard key={a.slug} article={a} size="small" />
+            <ArticleCard key={a!.slug} article={a!} size="small" />
           ))}
         </div>
       </section>
