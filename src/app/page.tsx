@@ -9,14 +9,9 @@ export default function HomePage() {
   const worldNews = getArticlesByCategory('World-News', 5);
   const hero = worldNews[0];
 
-  // Top Stories: one latest article per category, in nav order, skip hero
-  const topStories = CATEGORIES.map(cat => {
-    const articles = getArticlesByCategory(cat, 3);
-    if (cat === 'World-News') {
-      // Skip the hero article
-      return articles.find(a => a.slug !== hero?.slug) || null;
-    }
-    return articles[0] || null;
+  // Top Stories: one latest article per category (excluding World-News), in nav order
+  const topStories = CATEGORIES.filter(cat => cat !== 'World-News').map(cat => {
+    return getArticlesByCategory(cat, 1)[0] || null;
   }).filter(Boolean);
 
   // Secondary hero row: next 3 most recent articles across all categories
