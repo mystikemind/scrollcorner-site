@@ -51,8 +51,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
 
       {/* Hero image */}
       {article.image && (
-        <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: '16/9' }}>
-          <SafeImage src={article.image} alt={article.title} fill className="object-cover" />
+        <div className="mb-8">
+          <div className="relative w-full rounded-2xl overflow-hidden" style={{ aspectRatio: '16/9' }}>
+            <SafeImage src={article.image} alt={article.title} fill className="object-cover" />
+          </div>
+          {article.image_source && (
+            <p className="text-[10px] text-white/25 mt-1.5 text-right">
+              Image courtesy of {article.image_source}
+            </p>
+          )}
         </div>
       )}
 
