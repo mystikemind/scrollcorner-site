@@ -27,8 +27,8 @@ export default function Header() {
       <div className="bg-[#e63946] text-white text-xs py-1.5 flex items-center">
         <span className="relative z-10 flex-shrink-0 font-black uppercase tracking-widest px-4 bg-white text-[#e63946] py-0.5 mr-2">LATEST</span>
         <div className="flex-1 overflow-hidden whitespace-nowrap">
-          <span className="ticker-content inline-block">
-            {tickerText}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{tickerText}
+          <span className="ticker-content inline-block whitespace-nowrap">
+            {tickerText}&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;{tickerText}&nbsp;&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;
           </span>
         </div>
       </div>

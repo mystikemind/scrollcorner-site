@@ -30,12 +30,12 @@ body {
 .article-body h2 { font-size: 1.3rem; font-weight: 800; color: #f0f4ff; margin: 2.5rem 0 0.75rem; border-left: 3px solid #e63946; padding-left: 0.75rem; }
 .article-body h3 { font-size: 1.1rem; font-weight: 700; color: #dde6f0; margin: 2rem 0 0.6rem; }
 
-/* Ticker animation */
+/* Ticker animation — starts visible, loops seamlessly */
 @keyframes ticker {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-.ticker-content { animation: ticker 160s linear infinite; }
+.ticker-content { animation: ticker 90s linear infinite; }
 .ticker-content:hover { animation-play-state: paused; }
 
 /* Card shimmer on hover */
