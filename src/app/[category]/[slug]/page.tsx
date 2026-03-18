@@ -28,51 +28,50 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
   const color = CATEGORY_COLORS[cat];
   const label = CATEGORY_LABELS[cat];
   const date = new Date(article.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const related = getArticlesByCategory(cat, 4).filter(a => a.slug !== slug);
+  const related = getArticlesByCategory(cat, 4).filter(a => a.slug !== slug).slice(0, 3);
   const paragraphs = article.body.split('\n\n').filter(p => p.trim());
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-3xl mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-white/40 mb-6">
+      <nav className="flex items-center gap-2 text-xs text-white/30 mb-6">
         <Link href="/" className="hover:text-white transition-colors">Home</Link>
         <span>/</span>
-        <Link href={`/${category}`} className="hover:text-white transition-colors" style={{ color }}>{label}</Link>
-        <span>/</span>
-        <span className="text-white/20 truncate">{article.title}</span>
+        <Link href={`/${category}`} className="hover:text-white transition-colors font-semibold" style={{ color }}>{label}</Link>
+      </nav>
+
+      {/* Category + date */}
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-lg" style={{ backgroundColor: color, color: '#fff' }}>{label}</span>
+        <span className="text-white/30 text-xs">{date}</span>
       </div>
 
-      {/* Header */}
-      <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded mb-4" style={{ backgroundColor: color + '22', color }}>
-        {label}
-      </span>
-      <h1 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">{article.title}</h1>
-      <p className="text-white/40 text-sm mb-6">{date}</p>
+      {/* Title */}
+      <h1 className="text-2xl md:text-4xl font-black text-white leading-tight mb-6">{article.title}</h1>
 
       {/* Hero image */}
       {article.image && (
-        <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden mb-8">
+        <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: '16/9' }}>
           <Image src={article.image} alt={article.title} fill className="object-cover" unoptimized />
         </div>
       )}
 
       {/* Ad slot */}
-      <div className="w-full h-20 bg-[#111827] rounded-xl mb-8 flex items-center justify-center text-white/20 text-xs border border-white/5">
+      <div className="w-full h-16 bg-[#0f1623] rounded-xl mb-8 flex items-center justify-center text-white/15 text-xs border border-white/5 tracking-widest uppercase">
         Advertisement
       </div>
 
       {/* Body */}
-      <article className="article-body mb-12">
-        {paragraphs.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+      <article className="article-body mb-10">
+        {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
       </article>
 
       {/* Source */}
       {article.source_url && (
-        <div className="border-t border-white/10 pt-4 mb-12">
-          <a href={article.source_url} target="_blank" rel="noopener noreferrer" className="text-xs text-white/30 hover:text-white/60 transition-colors">
-            Source →
+        <div className="border-t border-white/5 pt-4 mb-12">
+          <a href={article.source_url} target="_blank" rel="noopener noreferrer"
+            className="text-xs text-white/25 hover:text-white/50 transition-colors">
+            Source article →
           </a>
         </div>
       )}
@@ -80,11 +79,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
       {/* Related */}
       {related.length > 0 && (
         <div>
-          <h2 className="text-sm font-black uppercase tracking-widest text-white/40 mb-4 pb-2 border-b border-white/10">More in {label}</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-1 h-5 rounded-full" style={{ backgroundColor: color }} />
+            <h2 className="text-xs font-black uppercase tracking-widest text-white/50">More in {label}</h2>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {related.slice(0, 3).map(a => (
-              <ArticleCard key={a.slug} article={a} size="medium" />
-            ))}
+            {related.map(a => <ArticleCard key={a.slug} article={a} size="medium" />)}
           </div>
         </div>
       )}

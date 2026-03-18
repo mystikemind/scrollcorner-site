@@ -1,18 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-export { CATEGORIES, CATEGORY_LABELS, CATEGORY_COLORS } from './constants';
-
-export interface Article {
-  slug: string;
-  title: string;
-  body: string;
-  category: string;
-  image: string;
-  date: string;
-  tags: string[];
-  source_url: string;
-  discover: boolean;
-}
+import type { Article } from './constants';
+export { CATEGORIES, CATEGORY_LABELS, CATEGORY_COLORS, type Article } from './constants';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const CATEGORIES_LIST = ['World-News', 'Technology', 'Finance', 'Science', 'Entertainment', 'Sports'];

@@ -1,3 +1,15 @@
+export interface Article {
+  slug: string;
+  title: string;
+  body: string;
+  category: string;
+  image: string;
+  date: string;
+  tags: string[];
+  source_url: string;
+  discover: boolean;
+}
+
 export const CATEGORIES = [
   'World-News',
   'Technology',
