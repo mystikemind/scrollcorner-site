@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import Link from 'next/link';
 import { CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS, getArticle, getArticlesByCategory } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
@@ -52,7 +52,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
       {/* Hero image */}
       {article.image && (
         <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ aspectRatio: '16/9' }}>
-          <Image src={article.image} alt={article.title} fill className="object-cover" unoptimized />
+          <SafeImage src={article.image} alt={article.title} fill className="object-cover" />
         </div>
       )}
 

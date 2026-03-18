@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import SafeImage from './SafeImage';
 import { Article, CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/constants';
 
 export interface ArticleCardProps {
@@ -18,7 +18,7 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
     return (
       <Link href={href} className="group block relative overflow-hidden rounded-2xl bg-[#0f1623] card-hover">
         <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
-          <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+          <SafeImage src={article.image} alt={article.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -37,7 +37,7 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
     return (
       <Link href={href} className="group flex flex-col bg-[#0f1623] rounded-xl overflow-hidden card-hover h-full border border-white/5 hover:border-white/10 transition-colors">
         <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
-          <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" unoptimized />
+          <SafeImage src={article.image} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
         </div>
         <div className="p-4 flex flex-col flex-1">
           <div className="flex items-center gap-2 mb-2">
@@ -55,7 +55,7 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
     return (
       <Link href={href} className="group flex gap-3 items-start py-3 border-b border-white/5 last:border-0 hover:opacity-75 transition-opacity">
         <div className="relative flex-shrink-0 overflow-hidden rounded-lg" style={{ width: 72, height: 54 }}>
-          <Image src={article.image} alt={article.title} fill className="object-cover" unoptimized />
+          <SafeImage src={article.image} alt={article.title} fill className="object-cover" />
         </div>
         <div className="flex-1 min-w-0">
           <span className="text-xs font-bold uppercase tracking-wide" style={{ color }}>{label}</span>
@@ -70,7 +70,7 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
   return (
     <Link href={href} className="group flex flex-col bg-[#0f1623] rounded-xl overflow-hidden card-hover h-full border border-white/5 hover:border-white/10 transition-colors">
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
-        <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" unoptimized />
+        <SafeImage src={article.image} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
       </div>
       <div className="p-3 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-1.5">
