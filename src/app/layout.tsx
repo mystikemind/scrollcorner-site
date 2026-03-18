@@ -25,6 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-white/10 mt-16 py-8 text-center text-white/30 text-xs">
           <p>© {new Date().getFullYear()} ScrollCorner. All rights reserved.</p>
           <p className="mt-1">News aggregated and edited for informational purposes.</p>
+          <div className="flex items-center justify-center gap-4 mt-3">
+            <a href="/about" className="hover:text-white transition-colors">About</a>
+            <span>·</span>
+            <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+            <span>·</span>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+          </div>
         </footer>
       </body>
     </html>
