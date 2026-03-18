@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+export { CATEGORIES, CATEGORY_LABELS, CATEGORY_COLORS } from './constants';
 
 export interface Article {
   slug: string;
@@ -14,33 +15,7 @@ export interface Article {
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
-
-export const CATEGORIES = [
-  'World-News',
-  'Technology',
-  'Finance',
-  'Science',
-  'Entertainment',
-  'Sports',
-];
-
-export const CATEGORY_LABELS: Record<string, string> = {
-  'World-News': 'World News',
-  'Technology': 'Technology',
-  'Finance': 'Finance',
-  'Science': 'Science',
-  'Entertainment': 'Entertainment',
-  'Sports': 'Sports',
-};
-
-export const CATEGORY_COLORS: Record<string, string> = {
-  'World-News': '#e63946',
-  'Technology': '#4361ee',
-  'Finance': '#2a9d8f',
-  'Science': '#06d6a0',
-  'Entertainment': '#f4a261',
-  'Sports': '#e76f51',
-};
+const CATEGORIES_LIST = ['World-News', 'Technology', 'Finance', 'Science', 'Entertainment', 'Sports'];
 
 export function getArticlesByCategory(category: string, limit?: number): Article[] {
   const dir = path.join(CONTENT_DIR, category);
@@ -58,7 +33,7 @@ export function getArticlesByCategory(category: string, limit?: number): Article
 
 export function getAllArticles(limit?: number): Article[] {
   const all: Article[] = [];
-  for (const cat of CATEGORIES) {
+  for (const cat of CATEGORIES_LIST) {
     all.push(...getArticlesByCategory(cat));
   }
   all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

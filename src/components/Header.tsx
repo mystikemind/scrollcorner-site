@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { CATEGORIES, CATEGORY_LABELS } from '@/lib/articles';
+import { CATEGORIES, CATEGORY_LABELS } from '@/lib/constants';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
