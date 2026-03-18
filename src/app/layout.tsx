@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'ScrollCorner — Breaking News, Tech, Finance & More',
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="max-w-7xl mx-auto px-4 py-8">
           {children}
         </main>
+        <SpeedInsights />
         <footer className="border-t border-white/10 mt-16 py-8 text-center text-white/30 text-xs">
           <p>© {new Date().getFullYear()} ScrollCorner. All rights reserved.</p>
           <p className="mt-1">News aggregated and edited for informational purposes.</p>
