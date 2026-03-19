@@ -24,7 +24,6 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-md" style={{ backgroundColor: color, color: '#fff' }}>{label}</span>
-            <span className="text-white/40 text-xs">{date}</span>
           </div>
           <h1 className="text-xl md:text-3xl font-black text-white leading-tight mb-2 group-hover:text-white/90 transition-colors line-clamp-3">{article.title}</h1>
           <p className="text-white/55 text-sm leading-relaxed line-clamp-2 hidden md:block">{excerpt}</p>
@@ -42,7 +41,6 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
         <div className="p-4 flex flex-col flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded" style={{ backgroundColor: color + '25', color }}>{label}</span>
-            <span className="text-white/30 text-xs">{date}</span>
           </div>
           <h2 className="text-sm font-bold text-white leading-snug mb-2 group-hover:text-white/80 line-clamp-3 flex-1">{article.title}</h2>
           <p className="text-white/40 text-xs leading-relaxed line-clamp-2">{excerpt}</p>
@@ -60,7 +58,6 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
         <div className="flex-1 min-w-0">
           <span className="text-xs font-bold uppercase tracking-wide" style={{ color }}>{label}</span>
           <h3 className="text-xs font-semibold text-white leading-snug line-clamp-2 mt-0.5 group-hover:text-white/75">{article.title}</h3>
-          <p className="text-white/30 text-xs mt-1">{date}</p>
         </div>
       </Link>
     );
@@ -75,7 +72,6 @@ export default function ArticleCard({ article, size = 'medium' }: ArticleCardPro
       <div className="p-3 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-1.5">
           <span className="text-xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded text-[10px]" style={{ backgroundColor: color + '25', color }}>{label}</span>
-          <span className="text-white/25 text-[10px]">{date}</span>
         </div>
         <h2 className="text-sm font-bold text-white leading-snug group-hover:text-white/80 line-clamp-2">{article.title}</h2>
       </div>

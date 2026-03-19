@@ -22,7 +22,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       <div className="flex items-center gap-3 mb-8">
         <div className="w-1.5 h-8 rounded-full" style={{ backgroundColor: color }} />
         <h1 className="text-3xl font-black text-white">{label}</h1>
-        <span className="text-white/30 text-sm ml-2">{articles.length} articles</span>
       </div>
       {articles.length === 0 ? (
         <p className="text-white/40 text-center py-24">No articles yet. Check back soon.</p>
