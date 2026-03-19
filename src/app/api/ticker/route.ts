@@ -38,6 +38,26 @@ const FEED_TITLE_PATTERNS = [
   /deutsche welle/i, /^dw\b/i,
 ];
 
+// Reject analysis, opinion, feature, and question-style headlines
+const REJECT_PATTERNS = [
+  // Starts with analysis/question words
+  /^(how|why|what|when|where|who|is|are|can|could|should|will|has|have|does|do|did|inside|meet|watch|here'?s|opinion|analysis|explainer|fact.?check)\b/i,
+  // Ends with a question mark
+  /\?$/,
+  // Starts with a quote (dramatic opener) e.g. 'Unpleasant surprises': ...
+  /^['"']/,
+  // Feature story: "Scene: personal story" e.g. "Baking in rubble: Gaza woman..."
+  /^[^:]{5,40}:\s+[A-Z][a-z].*\b(woman|man|family|father|mother|child|people|community|village)\b/i,
+  // Vague social/cultural claim with no named entity — generic subject + makes/leaves/gives
+  /^(social media|climate change|new study|research|scientists say|report|study)\b/i,
+  // Starts lowercase = fragment
+  /^[a-z]/,
+];
+
+function isHardNews(title: string): boolean {
+  return !REJECT_PATTERNS.some(p => p.test(title));
+}
+
 async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
   try {
     const res = await fetch(feedUrl, {
@@ -52,8 +72,9 @@ async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
       const raw = (matches[i][1] || matches[i][2] || '').trim();
       const title = cleanTitle(raw);
       if (
-        title.length > 15 &&
-        !FEED_TITLE_PATTERNS.some(p => p.test(title))
+        title.length > 20 &&
+        !FEED_TITLE_PATTERNS.some(p => p.test(title)) &&
+        isHardNews(title)
       ) {
         titles.push(title);
         if (titles.length >= limit) break;
