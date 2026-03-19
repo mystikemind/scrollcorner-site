@@ -9,15 +9,11 @@ const CATEGORIES_LIST = ['World-News', 'Technology', 'Finance', 'Science', 'Ente
 export function getArticlesByCategory(category: string, limit?: number): Article[] {
   const dir = path.join(CONTENT_DIR, category);
   if (!fs.existsSync(dir)) return [];
-  const files = fs.readdirSync(dir)
+  const articles = fs.readdirSync(dir)
     .filter(f => f.endsWith('.json'))
-    .sort()
-    .reverse();
-  const limited = limit ? files.slice(0, limit) : files;
-  return limited.map(file => {
-    const raw = fs.readFileSync(path.join(dir, file), 'utf-8');
-    return JSON.parse(raw) as Article;
-  });
+    .map(file => JSON.parse(fs.readFileSync(path.join(dir, file), 'utf-8')) as Article)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return limit ? articles.slice(0, limit) : articles;
 }
 
 export function getAllArticles(limit?: number): Article[] {
