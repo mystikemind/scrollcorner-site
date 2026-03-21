@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'ScrollCorner — Breaking News, Tech, Finance & More',
@@ -24,6 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <SpeedInsights />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-J1251Y8850" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-J1251Y8850');
+        `}</Script>
         <footer className="border-t border-white/10 mt-16 py-8 text-center text-white/30 text-xs">
           <p>© {new Date().getFullYear()} ScrollCorner. All rights reserved.</p>
           <p className="mt-1">News aggregated and edited for informational purposes.</p>
