@@ -1,10 +1,36 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import SafeImage from '@/components/SafeImage';
 import Link from 'next/link';
 import { CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS, getArticle, getArticlesByCategory } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
 
 export const revalidate = 300;
+
+export async function generateMetadata({ params }: { params: Promise<{ category: string; slug: string }> }): Promise<Metadata> {
+  const { category, slug } = await params;
+  const cat = CATEGORIES.find(c => c.toLowerCase() === category);
+  if (!cat) return {};
+  const article = getArticle(cat, slug);
+  if (!article) return {};
+  return {
+    title: article.title,
+    description: article.body?.slice(0, 160),
+    openGraph: {
+      title: article.title,
+      description: article.body?.slice(0, 160),
+      url: `https://scrollcorner.com/${category}/${slug}`,
+      images: article.image ? [{ url: article.image, width: 1200, height: 630 }] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.body?.slice(0, 160),
+      images: article.image ? [article.image] : [],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const params: { category: string; slug: string }[] = [];
