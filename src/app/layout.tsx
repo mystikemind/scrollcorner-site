@@ -13,6 +13,13 @@ export const metadata: Metadata = {
     url: 'https://scrollcorner.com',
     siteName: 'ScrollCorner',
     type: 'website',
+    images: [{ url: 'https://scrollcorner.com/og-image.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ScrollCorner',
+    description: 'Breaking news on world events, technology, finance, science, entertainment, and sports.',
+    images: ['https://scrollcorner.com/og-image.jpg'],
   },
 };
 
