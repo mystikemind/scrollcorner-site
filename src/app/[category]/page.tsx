@@ -1,8 +1,23 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import ArticleCard from '@/components/ArticleCard';
 import { CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS, getArticlesByCategory } from '@/lib/articles';
 
 export const revalidate = 300;
+
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category } = await params;
+  const cat = CATEGORIES.find(c => c.toLowerCase() === category);
+  if (!cat) return {};
+  const label = CATEGORY_LABELS[cat];
+  const canonicalUrl = `https://scrollcorner.com/${category}`;
+  return {
+    title: `${label} News — ScrollCorner`,
+    description: `Latest ${label} news and updates on ScrollCorner.`,
+    alternates: { canonical: canonicalUrl },
+    openGraph: { url: canonicalUrl },
+  };
+}
 
 export async function generateStaticParams() {
   return CATEGORIES.map(cat => ({ category: cat.toLowerCase() }));

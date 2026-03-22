@@ -5,8 +5,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://scrollcorner.com'),
   title: 'ScrollCorner — Breaking News, Tech, Finance & More',
   description: 'Stay informed with ScrollCorner. Latest breaking news on world events, technology, finance, science, entertainment, and sports.',
+  alternates: { canonical: 'https://scrollcorner.com' },
   openGraph: {
     title: 'ScrollCorner',
     description: 'Breaking news on world events, technology, finance, science, entertainment, and sports.',

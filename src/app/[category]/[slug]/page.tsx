@@ -13,9 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   if (!cat) return {};
   const article = getArticle(cat, slug);
   if (!article) return {};
+  const canonicalUrl = `https://scrollcorner.com/${category}/${slug}`;
   return {
     title: article.title,
     description: article.body?.slice(0, 160),
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: article.title,
       description: article.body?.slice(0, 160),
