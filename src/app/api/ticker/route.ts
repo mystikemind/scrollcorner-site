@@ -52,6 +52,8 @@ const REJECT_PATTERNS = [
   /^(social media|climate change|new study|research|scientists say|report|study)\b/i,
   // Starts lowercase = fragment
   /^[a-z]/,
+  // Contains colon — usually feature/narrative framing
+  /:/,
 ];
 
 function isHardNews(title: string): boolean {
