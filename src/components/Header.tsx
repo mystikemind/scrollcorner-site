@@ -1,25 +1,11 @@
 'use client';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CATEGORIES, CATEGORY_LABELS, CATEGORY_COLORS } from '@/lib/constants';
 
-const DEFAULT_TICKER = 'Breaking news updated every 3 hours · World News · Technology · Finance · Science · Entertainment · Sports · Stay informed with ScrollCorner';
-
-export default function Header() {
+export default function Header({ tickerText }: { tickerText: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [tickerText, setTickerText] = useState(DEFAULT_TICKER);
   const date = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-  useEffect(() => {
-    fetch('/api/ticker')
-      .then(r => r.json())
-      .then(data => {
-        if (data.headlines?.length > 0) {
-          setTickerText(data.headlines.join('   ·   '));
-        }
-      })
-      .catch(() => {}); // silently fall back to default
-  }, []);
 
   return (
     <header className="sticky top-0 z-50">

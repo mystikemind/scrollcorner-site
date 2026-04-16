@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Script from 'next/script';
+import { getTickerText } from '@/lib/ticker';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://scrollcorner.com'),
@@ -24,11 +25,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const tickerText = await getTickerText();
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#080c18]">
-        <Header />
+        <Header tickerText={tickerText} />
         <main className="max-w-7xl mx-auto px-4 py-8">
           {children}
         </main>
