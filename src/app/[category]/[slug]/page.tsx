@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS, getArticle, getArticlesByCategory } from '@/lib/articles';
 import ArticleCard from '@/components/ArticleCard';
 
-export const revalidate = 300;
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string; slug: string }> }): Promise<Metadata> {
   const { category, slug } = await params;

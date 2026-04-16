@@ -2,8 +2,6 @@ import ArticleCard from '@/components/ArticleCard';
 import CategorySection from '@/components/CategorySection';
 import { CATEGORIES, getArticlesByCategory } from '@/lib/articles';
 
-export const revalidate = 300;
-
 export default function HomePage() {
   // Hero: latest article from World-News
   const worldNews = getArticlesByCategory('World-News', 5);

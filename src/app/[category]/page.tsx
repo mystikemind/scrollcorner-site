@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import ArticleCard from '@/components/ArticleCard';
 import { CATEGORIES, CATEGORY_COLORS, CATEGORY_LABELS, getArticlesByCategory } from '@/lib/articles';
 
-export const revalidate = 300;
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category } = await params;
