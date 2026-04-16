@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getAllArticles, CATEGORIES } from '@/lib/articles';
 
+export const dynamic = 'force-static';
+
 const BASE_URL = 'https://scrollcorner.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
