@@ -1,11 +1,12 @@
 name = "scrollcorner-site"
+compatibility_date = "2026-04-16"
 workers_dev = false
-
-[assets]
-directory = "out"
-not_found_handling = "404-page"
 
 routes = [
   { pattern = "scrollcorner.com", custom_domain = true },
   { pattern = "www.scrollcorner.com", custom_domain = true },
 ]
+
+[assets]
+directory = "out"
+not_found_handling = "404-page"
