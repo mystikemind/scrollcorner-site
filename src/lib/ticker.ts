@@ -54,6 +54,7 @@ async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
   try {
     const res = await fetch(feedUrl, {
       headers: { 'User-Agent': 'ScrollCorner/1.0' },
+      cache: 'no-store',
     });
     const text = await res.text();
     const titles: string[] = [];
