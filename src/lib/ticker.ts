@@ -50,11 +50,17 @@ function isHardNews(title: string): boolean {
   return !REJECT_PATTERNS.some(p => p.test(title));
 }
 
+// Static export can't use cache: 'no-store' (triggers NEXT_STATIC_GEN_BAILOUT
+// since there's no server to serve a "fresh" response at request time).
+// Instead, vary the URL per build so Next's persisted build-to-build fetch
+// cache can't match it against a previous build's cached response.
+const BUILD_CACHE_BUSTER = Date.now();
+
 async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
   try {
-    const res = await fetch(feedUrl, {
+    const bustedUrl = `${feedUrl}${feedUrl.includes('?') ? '&' : '?'}_cb=${BUILD_CACHE_BUSTER}`;
+    const res = await fetch(bustedUrl, {
       headers: { 'User-Agent': 'ScrollCorner/1.0' },
-      cache: 'no-store',
     });
     if (!res.ok) {
       console.error(`[ticker] ${feedUrl} returned HTTP ${res.status}`);
