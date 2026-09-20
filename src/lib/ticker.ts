@@ -56,6 +56,10 @@ async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
       headers: { 'User-Agent': 'ScrollCorner/1.0' },
       cache: 'no-store',
     });
+    if (!res.ok) {
+      console.error(`[ticker] ${feedUrl} returned HTTP ${res.status}`);
+      return [];
+    }
     const text = await res.text();
     const titles: string[] = [];
     const matches = [...text.matchAll(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>|<title>([\s\S]*?)<\/title>/g)];
@@ -73,7 +77,8 @@ async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
       }
     }
     return titles;
-  } catch {
+  } catch (e) {
+    console.error(`[ticker] fetch failed for ${feedUrl}:`, e);
     return [];
   }
 }
@@ -81,6 +86,7 @@ async function fetchHeadlines(feedUrl: string, limit = 4): Promise<string[]> {
 export async function getTickerText(): Promise<string> {
   try {
     const results = await Promise.all(TICKER_FEEDS.map(f => fetchHeadlines(f, 4)));
+    console.error('[ticker] per-feed headline counts:', results.map(r => r.length));
     const headlines = results.flat().filter(Boolean);
 
     const seen = new Set<string>();
@@ -92,8 +98,9 @@ export async function getTickerText(): Promise<string> {
     });
 
     if (unique.length > 0) return unique.slice(0, 10).join('   ·   ');
-  } catch {
-    // fall through to default
+    console.error('[ticker] no unique headlines survived filtering, using default');
+  } catch (e) {
+    console.error('[ticker] getTickerText failed:', e);
   }
   return DEFAULT_TICKER;
 }
